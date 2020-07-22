@@ -231,16 +231,17 @@ stocks = ["AALR3.SA",
 "YDUQ3.SA"]
 
 today = datetime.datetime.now()
+start = "2020-01-01"
 print(today.strftime("%x"))
 
 for stock in stocks:
     try:
         #print(si.get_live_price(stock))
-        few_days = si.get_data(stock , start_date = "2020-03-01"  , end_date = today.strftime("%x"))
+        few_days = si.get_data(stock , start_date = start  , end_date = today.strftime("%x"))
         #print(few_days)
         normalized_df=(few_days['close']-few_days['close'].mean())/few_days['close'].std()
         #print(normalized_df)
-        if(normalized_df.loc["2020-07-10"]<0):
+        if(normalized_df.loc["2020-07-10"]<-0.5):
             print(stock,normalized_df.loc["2020-07-10"])
             #plt.plot(normalized_df, label=stock)
     except:
